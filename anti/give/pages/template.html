@@ -1,0 +1,205 @@
+<!doctype html>
+<html>
+  <head>
+    <title>GIVE - [[title]]</title>
+    <link rel="shortcut icon" href="images/favicon.ico" />
+    <style>
+        body {
+            font: 12pt sans-serif;
+            margin: 0;
+            background: #E8EFFF;
+            
+        }
+        .header {
+            background: white;
+            border-bottom: 1px solid #C1CADD;
+            top: 0;
+            width: 100%;
+            height: 110px;
+            overflow: hidden;
+            
+        }
+        .header h1 {
+            margin: 0px;
+            font-size: 20pt;
+            margin-bottom: 0;
+            display: inline;
+        }
+        
+        .content h1, .content h2, .content h3, .content h4 {
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        
+        .header .small {
+            font-size: 85%;
+            color: #666;
+        }
+        
+        .header .big {
+            font-size: 125%;
+            color: #B4181E;
+        }
+        
+        .header img {
+            float: left;
+            padding-left: 7px;
+            padding-right: 9px;
+            height:103px;
+            top:-6px;
+            position:relative;
+        }
+        .subheader {
+            width: 900px;
+            margin-top: 12px;
+            margin-right: auto;
+            margin-left: auto;
+        }
+        .main {
+            width: 900px;
+            margin-right: auto;
+            margin-left: auto;
+        }
+        .content {
+            margin: 20px;
+            width: 700px;
+            float: right; /*fixes text selection*/
+        }
+        
+        .sidebar {
+            float: left;
+            margin-top: -1px;
+        }
+        
+        .sidebar .box {
+            background: white;
+            width: 127px;
+            padding: 15px;
+            border: 1px solid #C1CADD;
+            margin-bottom: 20px;
+        }
+        
+        .sidebar .box.first {
+            border-top: none;
+            padding-top: 10px;
+        }
+        
+        
+        .content .box {
+            background: white;
+            padding: 20px;
+            border: 1px solid #C1CADD;
+            margin-bottom: 20px;
+        }
+        
+        .content img.boxed {
+            background: white;
+            border: 1px solid #C1CADD;
+        }
+        
+        .content img {
+            padding: 10px;
+            float: right;
+        }
+        
+        .slideshow {
+          overflow: hidden;
+          margin-bottom: 10px;
+          
+        }
+        
+        .slideshow .viewport {
+          position: relative;
+        }
+        
+        .slideshow * {
+          white-space: nowrap;
+          display: inline-block;
+        }
+        
+        .slideshow img, .slideshow ul {
+          padding: 0;
+          float: left;
+          margin-right: 20px;
+        }
+        
+        input {
+          border: 1px solid black;
+        }
+        .motto {
+            font-style: italic;
+            font-size: 90%;
+            margin-left: 10px;
+            color: #666;
+            display: inline-block;
+            
+        }
+        
+        .sidebar a {
+          font-size: 115%;
+        }
+        
+        a {
+          
+          text-decoration: none;
+          color: #186bb4;
+        }
+        
+    </style>
+    <script>
+      var slideshows = [];
+      
+      function slideshow(el){
+        var imgs = el.getElementsByTagName('li');
+        var steps = imgs.length;
+        var inc = (el.scrollWidth/steps);
+        
+        var duration = 500;
+        function interpolate(x){
+          return x*x*(3 - 2*x);
+        }
+        setInterval(function(){
+          var end = +new Date + duration;
+        
+          var animate = function(){
+            var x = interpolate(Math.max(0,Math.min(1,(1-(end - new Date)/duration))));
+            el.scrollLeft = inc * x;
+            //console.log(x, end - new Date, (end - new Date)/duration);
+            if(x < 1){
+              setTimeout(animate, 1000/60);
+            }else{
+              imgs[0].parentNode.appendChild(imgs[0]);
+              
+              el.scrollLeft = 0;
+            }
+          }
+          animate();
+        }, 3000);
+        el.scrollLeft = 0;
+        /*
+          Here's a nifty compilation of a few interpolation functions
+          0.5 - cos(x * Math.PI) / 2 //sinusoidal
+          x*x*(3 - 2*x) // smoothstep
+          x*x*x*(x*(x*6 - 15) + 10) //smootherstep
+        */
+      }
+      window.onload = function(){
+        for(var i = 0; i < slideshows.length; i++) slideshow(slideshows[i]);
+      }
+    </script>
+  </head>
+  <body>
+    <div class="header">
+        <div class="subheader">
+            <a href="."><img src="images/give.png"></a>
+            <h1><span class="big">G</span>rowth <span class="small">and</span> <span class="big">I</span>nspiration <span class="small">through</span> <span class="big">V</span>olunteering <span class="small">and</span> <span class="big">E</span>ducation</h1>
+            <div class="motto">Promoting youth leadership through long backronyms</div>
+        </div>
+    </div>
+    <div class="main">
+      <div class="sidebar">[[sidebar]]</div>
+      <div class="content">[[content]]</div>
+    </div>
+  </body>
+</html>
+

@@ -1,0 +1,279 @@
+<!doctype html>
+<html>
+  <head>
+    <title>GIVE - Projects
+</title>
+    <link rel="shortcut icon" href="images/favicon.ico" />
+    <style>
+        body {
+            font: 12pt sans-serif;
+            margin: 0;
+            background: #E8EFFF;
+            
+        }
+        .header {
+            background: white;
+            border-bottom: 1px solid #C1CADD;
+            top: 0;
+            width: 100%;
+            height: 110px;
+            overflow: hidden;
+            
+        }
+        .header h1 {
+            margin: 0px;
+            font-size: 20pt;
+            margin-bottom: 0;
+            display: inline;
+        }
+        
+        .content h1, .content h2, .content h3, .content h4 {
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        
+        .header .small {
+            font-size: 85%;
+            color: #666;
+        }
+        
+        .header .big {
+            font-size: 125%;
+            color: #B4181E;
+        }
+        
+        .header img {
+            float: left;
+            padding-left: 7px;
+            padding-right: 9px;
+            height:103px;
+            top:-6px;
+            position:relative;
+        }
+        .subheader {
+            width: 900px;
+            margin-top: 12px;
+            margin-right: auto;
+            margin-left: auto;
+        }
+        .main {
+            width: 900px;
+            margin-right: auto;
+            margin-left: auto;
+        }
+        .content {
+            margin: 20px;
+            width: 700px;
+            float: right; /*fixes text selection*/
+        }
+        
+        .sidebar {
+            float: left;
+            margin-top: -1px;
+        }
+        
+        .sidebar .box {
+            background: white;
+            width: 127px;
+            padding: 15px;
+            border: 1px solid #C1CADD;
+            margin-bottom: 20px;
+        }
+        
+        .sidebar .box.first {
+            border-top: none;
+            padding-top: 10px;
+        }
+        
+        
+        .content .box {
+            background: white;
+            padding: 20px;
+            border: 1px solid #C1CADD;
+            margin-bottom: 20px;
+        }
+        
+        .content img.boxed {
+            background: white;
+            border: 1px solid #C1CADD;
+        }
+        
+        .content img {
+            padding: 10px;
+            float: right;
+        }
+        
+        .slideshow {
+          overflow: hidden;
+          margin-bottom: 10px;
+          
+        }
+        
+        .slideshow .viewport {
+          position: relative;
+        }
+        
+        .slideshow * {
+          white-space: nowrap;
+          display: inline-block;
+        }
+        
+        .slideshow img, .slideshow ul {
+          padding: 0;
+          float: left;
+          margin-right: 20px;
+        }
+        
+        input {
+          border: 1px solid black;
+        }
+        .motto {
+            font-style: italic;
+            font-size: 90%;
+            margin-left: 10px;
+            color: #666;
+            display: inline-block;
+            
+        }
+        
+        .sidebar a {
+          font-size: 115%;
+        }
+        
+        a {
+          
+          text-decoration: none;
+          color: #186bb4;
+        }
+        
+    </style>
+    <script>
+      var slideshows = [];
+      
+      function slideshow(el){
+        var imgs = el.getElementsByTagName('li');
+        var steps = imgs.length;
+        var inc = (el.scrollWidth/steps);
+        
+        var duration = 500;
+        function interpolate(x){
+          return x*x*(3 - 2*x);
+        }
+        setInterval(function(){
+          var end = +new Date + duration;
+        
+          var animate = function(){
+            var x = interpolate(Math.max(0,Math.min(1,(1-(end - new Date)/duration))));
+            el.scrollLeft = inc * x;
+            //console.log(x, end - new Date, (end - new Date)/duration);
+            if(x < 1){
+              setTimeout(animate, 1000/60);
+            }else{
+              imgs[0].parentNode.appendChild(imgs[0]);
+              
+              el.scrollLeft = 0;
+            }
+          }
+          animate();
+        }, 3000);
+        el.scrollLeft = 0;
+        /*
+          Here's a nifty compilation of a few interpolation functions
+          0.5 - cos(x * Math.PI) / 2 //sinusoidal
+          x*x*(3 - 2*x) // smoothstep
+          x*x*x*(x*(x*6 - 15) + 10) //smootherstep
+        */
+      }
+      window.onload = function(){
+        for(var i = 0; i < slideshows.length; i++) slideshow(slideshows[i]);
+      }
+    </script>
+  </head>
+  <body>
+    <div class="header">
+        <div class="subheader">
+            <a href="."><img src="images/give.png"></a>
+            <h1><span class="big">G</span>rowth <span class="small">and</span> <span class="big">I</span>nspiration <span class="small">through</span> <span class="big">V</span>olunteering <span class="small">and</span> <span class="big">E</span>ducation</h1>
+            <div class="motto">Promoting youth leadership through long backronyms</div>
+        </div>
+    </div>
+    <div class="main">
+      <div class="sidebar"><div class="box first">
+  <a href=".">Home</a><br>
+  <a href="about.html">About</a><br>
+  <a href="projects.html">Projects</a><br>
+  <a href="donate.html">Donate</a><br>
+</div>
+
+<div class="box">
+  <a href="https://www.facebook.com/pages/GIVE-Growth-and-Inspiration-through-Volunteering-and-Education/104842809592156">Facebook</a><br>
+  <a href="contact.html">Contact</a><br>
+  <br>
+  703-587-7104
+</div>
+</div>
+      <div class="content">
+<h2>Projects</h2>
+<div class="box">
+    
+    
+<h3>GIVE Free Tutoring Program</h3>
+
+<div class="slideshow" id="projects_slideshow">
+    <div class="viewport">
+        <ul>
+<li><img src="http://static.wix.com/media/f74503_2ce1ddfb298d4dc7f79db8b6c6408aeb.jpg_128" alt="" /></li>
+<li><img src="http://static.wix.com/media/f74503_1ab6bb12423757c612890a7242dd6033.jpg_128" alt="" /></li>
+<li><img src="http://static.wix.com/media/f74503_82e6ac8e6fa83beff21e5f3ee721ec81.jpg_128" alt="" /></li>
+<li><img src="http://static.wix.com/media/f74503_f930c321c8dba60b544fdbf2671f8ea0.jpg_128" alt="" /></li>
+<li><img src="http://static.wix.com/media/f74503_e730bd785c935c4708dad04eb4eb3a81.jpg_128" alt="" /></li>
+<li><img src="http://static.wix.com/media/f74503_025fc33da0410d51ccd373d14720771c.jpg_128" alt="" /></li>
+<li><img src="http://static.wix.com/media/f74503_6721371f008dfa29d4c35e33869015d4.jpg_128" alt="" /></li>
+<li><img src="http://static.wix.com/media/f74503_4bdb3baa4261380659131a19f8208fc3.jpg_128" alt="" /></li>
+<li><img src="http://static.wix.com/media/f74503_43ae81c8d24ade5d8602b82ebee0b21d.jpg_128" alt="" /></li>
+<li><img src="http://static.wix.com/media/f74503_525244cfce570934965e4c5f90b03170.jpg_128" alt="" /></li>
+<li><img src="http://static.wix.com/media/f74503_9fab13611ed77b0a55ab94c17e978290.jpg_128" alt="" /></li>
+<li><img src="http://static.wix.com/media/f74503_601003f50e3fc9acfa92211d5ba28a48.jpg_128" alt="" /></li>
+        </ul>
+    </div>
+</div>
+
+<script>
+slideshows.push(document.getElementById("projects_slideshow"));
+</script>
+
+To work towards the mission of "promoting leadership of youth through projects that improve the quality of life in their communities", GIVE organizes and coordinates a free tutoring program that provides academic assistance to elementary school students, especially those from disadvantaged backgrounds. We do this by pairing high schools tutors with elementary school students for a year-long mentorship experience. Starting with only a handful of students in the spring of 2010, we have since grown to providing services to over 100 children and getting over 300 people involved. During the 2010-11 school year we held tutoring sessions at one community center in Annandale, but are expanding to three new locations across Fairfax County in the fall of 2011 in order to reach a greater audience.
+<p>
+2011-2012 GIVE Tutoring Centers and respective leaders
+
+
+
+<ol>
+<li><b>James Lee Community Center</b> - Kevin Cao, Julia Anderson, Brian Gramp</li>
+<li><b>Bailey's Community Center</b> - Abrar Omeish, Saniya Suri, Yasmeen Mushtaq</li>
+<li><b>Southgate Community Center</b> - Sebastian Lerner, Lucia Lee, Samyu J., Sameer S.</li>
+<li><b>Mason District Gov. Center</b> - Kartik Gupta, Tien Bui, Ragini K, Arya Dahal, Tahmina A.</li></ol>
+<p>
+If you are interested in becoming involved in GIVE's tutoring program, please email us at <a href="mailto:directors@giveyouth.org">directors@giveyouth.org</a> or send us a message under the <a href="contact.html">"Contact"</a> tab.
+</div>
+<div class="box">
+<h3>Children's Book Publication</h3>
+<img src="http://static.wix.com/media/f74503_ac5d937a4881aede10aeb1f8928ac33d.jpg_128" alt="" />
+GIVE is currently in the process of publishing a children's book, titled "Being Different is what Makes Us Special!", which promotes cultural/religious tolerance and awareness of bullying. These books are to be distributed to elementary schools across the county to spread awareness for this issue, especially in relation to the prevalence of recent bullying incidents.
+</div>
+<div class="box">
+<h3>Test-Prep Book Drive</h3>
+
+<img src="http://static.wix.com/media/f74503_bf223a44c918684e33bd2da0e36aa1a9.jpg_128" alt="" />
+With the end of AP exams and SATs, many students throw away their used prep books. In response to this, GIVE is hosting a book drive in high schools to collect these unwanted study aid guides and distribute them to high school students across the DC Metropolitan Area who plan to take these courses next year, but may not have the means to afford the materials.<br />
+<br>
+<br>
+
+</div>
+
+
+</div>
+    </div>
+  </body>
+</html>
+

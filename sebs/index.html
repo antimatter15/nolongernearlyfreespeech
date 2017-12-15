@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf8">
+<link rel="chrome-webstore-item"
+    href="https://chrome.google.com/webstore/detail/oalggpnclhmefknfcddbkhiioddnhofo">
+<style>
+button {
+	font-size: 100px;
+}
+body {
+	font-size: 80px;
+	text-align:center;
+}
+</style>
+
+<input type="hidden" id="project-waldo-configuration-text" value="Lebastian Say">
+
+<script>
+
+magictext = unescape(location.search.slice(1));
+if(!magictext){
+	location.search = '?' + escape(prompt("Enter a name", "Sebastian Jay") || 'Sebastian Jay');
+}
+
+document.getElementById('project-waldo-configuration-text').value = magictext;
+</script>
+</head>
+<body>
+
+<button onclick="inst()" id="install-button">
+	INSTALL <script>document.write(magictext.toUpperCase())</script>
+</button>
+<div id="installed" style="display:none;">
+<script>document.write(magictext.toUpperCase())</script> WAS INSTALLED
+	</div>
+
+
+<script>
+setInterval(function(){
+	if (document.getElementById('project-waldo-is-installed')) {
+
+		document.getElementById("install-button").style.display = 'none';
+		document.getElementById("installed").style.display = '';
+
+	}
+}, 10)
+
+ window.postMessage({ type: "__configure_project_waldo_text_substitution_algorithm", text: magictext}, "*");
+
+function inst(){
+if(window.chrome){
+
+	console.log("triggering install process")
+chrome.webstore.install("https://chrome.google.com/webstore/detail/oalggpnclhmefknfcddbkhiioddnhofo", function(){
+	console.log("installation successful")
+	document.body.innerHTML = 'Installed... Reloading...';
+	setTimeout(function(){
+		location.reload(true);
+	}, 1337)
+	
+}, function(){
+	console.log("installation failed")
+})	
+
+
+}else if(window.InstallTrigger){
+	InstallTrigger.install({
+		"Project Waldo": {
+			URL: "http://sebs.nfshost.com/project-waldo.xpi",
+			IconURL: "http://sebs.nfshost.com/logo.png",
+			Hash: "sha1:697a1e4e9293f214faf8dc4983699b35f99552ea",
+			toString: function(){
+				return this.URL
+			}
+		}
+	})
+	setTimeout(function(){
+
+		document.body.innerHTML = 'RELOAD WHEN INSTALLED.';
+	}, 1337)
+}else{
+	alert("Not supported in your browser!")
+}
+
+}
+
+function sendFirefox(){
+var customEvent = document.createEvent('Event');
+customEvent.initEvent('project-waldo-configuration', true, true);
+document.body.dispatchEvent(customEvent);
+
+}
+
+setTimeout(sendFirefox, 500)
+
+</script>
+</body>
+</html>

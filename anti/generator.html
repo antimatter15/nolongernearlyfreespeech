@@ -1,0 +1,46 @@
+<script>
+var colors = {
+	red: "#CC0000",
+	blue: "#007FFF",
+	brown: "#964B00",
+	green: "#266A2E",
+	purple: "#B23AEE"
+};
+
+var names = Object.keys(colors);
+var values = names.map(function(e){return colors[e]});
+
+var last_el = null;
+function sample(){
+	var el = names[Math.floor(Math.random() * names.length)];
+	if(el != last_el){
+		last_el = el;
+		return el;
+	}
+	return sample()
+}
+
+var last_2el = null;
+function sample2(){
+	var el = names[Math.floor(Math.random() * names.length)];
+	var zel = sample()
+	if(el != last_2el && el != zel){
+		last_2el = el;
+		return [el, zel];
+	}
+	return sample2()
+}
+
+for(var i = 0; i < 100; i++){
+	var el = sample();
+	document.write('<span style="color: ' + colors[el] + '">' + el + '<'+'/span> ')
+}
+
+document.write('<hr>')
+
+for(var i = 0; i < 100; i++){
+	var el = sample2();
+	document.write('<span style="color: ' + colors[el[0]] + '">' + el[1] + '<'+'/span> ')
+}
+
+</script>
